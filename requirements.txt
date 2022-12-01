@@ -1,0 +1,5 @@
+cython
+zarr
+scipy
+# For accessing `zarr` and `h5` files with real world coordinates 
+git+https://github.com/funkelab/daisy@721d284#egg=daisy
