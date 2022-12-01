@@ -18,8 +18,8 @@ Then: `pip install git+https://github.com/funkelab/funlib.evaluate@d2852b3#egg=f
 
 ```bash=
 skel=skeletons/100nm_Cutout6_Testing_1025.npz
-fin=/n/groups/htem/Segmentation/shared-nondev/cbx_fn/gt_xnh/s22_WM_100nm_recdb27_400_upscaled_cutout6_3x/test/test_unet_vxel_skel_300_frag06_expanded.zarr
-ds=volumes/segmentation_0.500
+fin=test_unet_vxel_skel_300_frag06_expanded.h5
+ds=submission
 python eval.py $skel $fin $ds
 ```
 
