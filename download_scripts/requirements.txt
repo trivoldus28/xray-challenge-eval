@@ -1,0 +1,3 @@
+cloud-volume
+zarr
+git+https://github.com/funkelab/daisy@721d284#egg=daisy
