@@ -14,7 +14,7 @@ roi_shape = cloudvol.volume_size*cloudvol.resolution
 roi_shape = roi_shape[::-1]
 raw_roi = daisy.Roi(roi_offset, roi_shape)
 ds = daisy.prepare_ds(
-        'xpress-challenge.zarr', 'volumes/training_gt_labels',
+        '../xpress-challenge.zarr', 'volumes/training_gt_labels',
         raw_roi, voxel_size, cloudvol.data_type,
         compressor={'id': 'blosc', 'clevel': 3},
         delete=True

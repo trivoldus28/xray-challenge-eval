@@ -9,7 +9,7 @@ Run the provided scripts, e.g.,:
 
 `python download_training_raw.py` and `python download_training_gt.py`
 
-These will download the datasets to a new Zarr file "xpress-challenge.zarr".
+These will download the datasets to a new Zarr file "../xpress-challenge.zarr".
 
 ### Visualize downloaded data
 
