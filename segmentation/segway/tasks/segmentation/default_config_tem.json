@@ -1,0 +1,98 @@
+{
+    "Input":
+        {
+            "log_dir": ".logs/{script_folder}/{experiment}_{network}_{iteration}",
+            "output_file" : "./{experiment}.zarr"
+        },
+
+    "GlobalConfig":
+        {
+            "block_size_in_pix": 1,
+            "fragments_block_size": [128, 128, 128],
+            "fragments_context": [32, 32, 32],
+            "agglomerate_block_size": [512, 512, 512],
+            // "agglomerate_block_size": [256, 256, 256],
+            "agglomerate_context": [64, 64, 64],
+            // "agglomerate_context": [128, 128, 128],
+            "find_segments_block_size": [256, 256, 256],
+            "write_size": [64, 64, 64],
+            "thresholds": [0.5]
+        },
+
+    "Network":
+        {
+            "predict_file": "predict.py",
+            "output_key": "affs"
+         },
+
+    "PredictTask":
+        {
+            "out_dataset" : "volumes/affs",
+            "roi_shrink_context": true,
+            "num_workers": 1
+        },
+        
+    "ExtractFragmentTask":
+        {
+            "affs_dataset": "/volumes/affs",
+            "fragments_dataset": "/volumes/fragments",
+            "fragments_in_xy": 1,
+            "mask_fragments": 0,
+            "min_seed_distance": 5,
+            "epsilon_agglomerate": 0.01,
+            "filter_fragments": 0.1,
+            "num_workers": 16,
+            "max_retries": 3
+        },
+
+    "AgglomerateTask":
+        {
+            "affs_dataset": "/volumes/affs",
+            "fragments_dataset": "/volumes/fragments",
+            "merge_function": "hist_quant_50",
+            "num_workers": 4,
+            "max_retries": 2
+        },
+
+    "FindSegmentsGetLocalLUTsTask":
+        {
+            "lut_dir": "luts/fragment_segment",
+            "fragments_dataset": "/volumes/fragments",
+            "max_retries": 3,
+            "num_workers": 8
+        },
+
+    "FindSegmentsGetLocalEdgesTask":
+        {
+            "lut_dir": "luts/fragment_segment",
+            "fragments_dataset": "/volumes/fragments",
+            "max_retries": 3,
+            "num_workers": 8
+        },
+
+    "FindSegmentsGetGlobalLUTsTask":
+        {
+            "lut_dir": "luts/fragment_segment",
+            "fragments_dataset": "/volumes/fragments",
+            "max_retries": 3,
+            "num_workers": 8
+        },
+
+    "FindSegmentsGetChunkedGlobalLUTsTask":
+        {
+            "lut_dir": "luts/fragment_segment",
+            "fragments_dataset": "/volumes/fragments",
+            "max_retries": 3,
+            // "chunk_size": [4, 4, 4],
+            "num_workers": 8
+        },
+
+    "ExtractSegmentationTask":
+        {
+            "lut_dir": "luts/fragment_segment",
+            "fragments_dataset": "/volumes/fragments",
+            "out_dataset": "volumes/segmentation",
+            "max_retries": 3,
+            "num_workers": 8
+        }
+}
