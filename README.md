@@ -26,7 +26,7 @@ python eval.py $skel $fin $ds
 #### Expected outputs
 
 ```
-Removing 5783 GT annotations outside of evaluated ROI
-BG_NODES 3780
-Expected run-length: 13050.052788437139
+Removing 5705 GT annotations outside of evaluated ROI
+BG_NODES 3783
+Expected run-length: 12993.252263601169
 ```

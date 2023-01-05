@@ -23,14 +23,9 @@ def assign_skeleton_indexes(graph):
 
 
 def add_predicted_seg_labels_from_vol(
-        graph, segmentation_file, segmentation_ds,
-        load_segment_array_to_memory=True):
+        graph, segment_array):
 
     bg_nodes=0
-    segment_array = daisy.open_ds(segmentation_file, segmentation_ds)
-    segment_array = segment_array[segment_array.roi]
-    if load_segment_array_to_memory:
-        segment_array.materialize()
 
     nodes_outside_roi = []  
     for i, (treenode, attr) in enumerate(graph.nodes(data=True)):
@@ -52,15 +47,15 @@ def add_predicted_seg_labels_from_vol(
     return assign_skeleton_indexes(graph)
 
 
-def generate_graphs_with_seg_labels(segmentation_file, segmentation_ds, skeleton_path, num_processes):
+def generate_graphs_with_seg_labels(segment_array, skeleton_path, num_processes):
     unlabeled_skeleton = np.load(skeleton_path, allow_pickle=True)
-    return add_predicted_seg_labels_from_vol(unlabeled_skeleton.copy(), segmentation_file, segmentation_ds)    
+    return add_predicted_seg_labels_from_vol(unlabeled_skeleton.copy(), segment_array)    
 
 
-def eval_erl(skeleton_file, segmentation_file, segmentation_ds):
+def eval_erl(skeleton_file, segment_array):
     
     node_seg_lut = {}
-    graph_list = generate_graphs_with_seg_labels(segmentation_file, segmentation_ds, skeleton_file, 1)
+    graph_list = generate_graphs_with_seg_labels(segment_array, skeleton_file, 1)
     for node, attr in graph_list.nodes(data=True):
         node_seg_lut[node]=attr['seg_label']
 
@@ -71,8 +66,7 @@ def eval_erl(skeleton_file, segmentation_file, segmentation_ds):
     return res
 
 
-if __name__=="__main__":
-
+def run_eval():
     ap = argparse.ArgumentParser()
     ap.add_argument("skeleton_file", type=str, help='Coordinates have to be XYZ in nm')
     ap.add_argument("segmentation_file", type=str, help='')
@@ -82,5 +76,28 @@ if __name__=="__main__":
     for k, v in arg_config.items():
         globals()[k] = v
 
-    res_erl = eval_erl(skeleton_file, segmentation_file, segmentation_ds)
+    # load segmentation
+    segment_array = daisy.open_ds(segmentation_file, segmentation_ds)
+    segment_array = segment_array[segment_array.roi]
+
+    # downsample if necessary
+    if segment_array.data.shape == (1072, 1072, 1072):
+        ndarray = segment_array.data[::3, ::3, ::3]
+        ds_voxel_size = segment_array.voxel_size * 3
+        # align ROI
+        roi_begin = (segment_array.roi.begin // ds_voxel_size) * ds_voxel_size
+        roi_shape = daisy.Coordinate(ndarray.shape) * ds_voxel_size
+        segment_array = daisy.Array(data=ndarray,
+                                    roi=daisy.Roi(roi_begin, roi_shape),
+                                    voxel_size=ds_voxel_size
+                                    )
+
+    # load to mem
+    segment_array.materialize()
+
+    res_erl = eval_erl(skeleton_file, segment_array)
     print(f'Expected run-length: {res_erl}')
+
+
+if __name__=="__main__":
+    run_eval()
