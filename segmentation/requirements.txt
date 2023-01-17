@@ -9,3 +9,4 @@ git+https://github.com/trivoldus28/daisy@b7678eb#egg=daisy
 git+https://github.com/trivoldus28/funlib.segment@5779e0d#egg=funlib.segment
 git+https://github.com/htem/lsd@d2b4c36#egg=lsd
 git+https://github.com/htem/waterz@c963637#egg=waterz
+git+https://github.com/funkey/gunpowder@68dffe1#egg=gunpowder

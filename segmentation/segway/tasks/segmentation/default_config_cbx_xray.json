@@ -52,7 +52,7 @@
             "mask_fragments": 0,
             "min_seed_distance": 5,
             "epsilon_agglomerate": 0.01,
-            "filter_fragments": 0.1,
+            "filter_fragments": 0.3,
             "num_workers": 32,
             "max_retries": 3
         },

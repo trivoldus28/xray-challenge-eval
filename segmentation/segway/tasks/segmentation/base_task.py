@@ -109,7 +109,7 @@ class BaseTask():
 
     # common parameters for tasks
     max_retries = Parameter(2)
-    no_launch_workers = Parameter(False)
+    no_run_workers = Parameter(False)
     overwrite = Parameter(False)
     no_check_dependency = Parameter(False)
     no_precheck = Parameter(False)
@@ -165,7 +165,7 @@ class BaseTask():
         if self.config_hash is None:
             config_str = ''.join(['%s' % (v,) for k, v in config.items()
                                  if k not in ['overwrite', 'num_workers',
-                                              'no_launch_workers']])
+                                              'no_run_workers']])
             self.config_hash = str(hashlib.md5(config_str.encode()).hexdigest())
 
         self.config_hash_short = self.config_hash[0:8]
@@ -285,7 +285,7 @@ class BaseTask():
     def _new_worker(self):
         '''Run "shell" command to start a new worker'''
 
-        if self.no_launch_workers is False:
+        if self.no_run_workers is False:
 
             assert 'DAISY_CONTEXT' in os.environ, (
                 "DAISY_CONTEXT must be defined as an environment variable")

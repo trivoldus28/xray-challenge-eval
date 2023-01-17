@@ -1,6 +1,5 @@
 from __future__ import print_function
 import sys
-# sys.path.insert(0, '/n/groups/htem/Segmentation/tmn7/gunpowder-1.2.2-220114')
 import json
 import logging
 import os

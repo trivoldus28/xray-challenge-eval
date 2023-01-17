@@ -150,5 +150,3 @@ if __name__ == "__main__":
 
             # recording block done in the database
             completion_db.add_finished(block.block_id)
-
-            daisy_client.release_block(block)
