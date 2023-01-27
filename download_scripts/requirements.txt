@@ -1,4 +1,0 @@
-cloud-volume
-zarr
-git+https://github.com/trivoldus28/daisy@b7678eb#egg=daisy
-git+https://github.com/funkelab/funlib.show.neuroglancer@d11c1bd#egg=funlib.show.neuroglancer
