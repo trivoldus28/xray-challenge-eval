@@ -1,7 +1,7 @@
 
 # XPRESS challenge
 
-See [data/](data/README.md) for more directions on downloading datasets.
+See [data/](data/) for more directions on downloading datasets.
 
 You can also preview the datasets first before downloading:
 
@@ -13,8 +13,8 @@ Test raw: [link](https://neuroglancer-demo.appspot.com/#!%7B%22dimensions%22:%7B
 
 ## Running baseline segmentation model
 
-See [segmentation/](segmentation/README.md) for running our baseline segmentation model.
+See [segmentation/](segmentation/) for running our baseline segmentation model.
 
 ## Evaluations and submission
 
-And see [eval/](eval/README.md) for directions on running evaluations and submission.
+And see [eval/](eval/) for directions on running evaluations and submission.

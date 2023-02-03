@@ -9,21 +9,21 @@ Download links and data prep scripts for the XPRESS datasets.
 
 ### Download image data
 
-Training raw: [download](https://storage.googleapis.com/lee-pacureanu_data-exchange_us-storage/xray-challenge/xpress-training-raw.h5)
+Training raw: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/xpress-training-raw.h5)
 
-Training voxel labels: [download](https://storage.googleapis.com/lee-pacureanu_data-exchange_us-storage/xray-challenge/xpress-training-voxel-labels.h5)
+Training voxel labels: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/xpress-training-voxel-labels.h5)
 
-Validation raw: [download](https://storage.googleapis.com/lee-pacureanu_data-exchange_us-storage/xray-challenge/xpress-validation-raw.h5)
+Validation raw: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/xpress-validation-raw.h5)
 
-Test raw: [download](https://storage.googleapis.com/lee-pacureanu_data-exchange_us-storage/xray-challenge/xpress-test-raw.h5)
+Test raw: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/xpress-test-raw.h5)
 
 ### Download ground-truth skeletons
 
 The skeletons are stored as [NetworkX](https://networkx.org/) graphs in [.npz](https://numpy.org/doc/stable/reference/generated/numpy.savez.html) files. Please see the ../eval/eval.py script to see how to properly read these skeleton files.
 
-Training skeletons: [download](https://storage.googleapis.com/lee-pacureanu_data-exchange_us-storage/xray-challenge/XPRESS_training_skels.npz)
+Training skeletons: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/XPRESS_training_skels.npz)
 
-Validation skeletons: [download](https://storage.googleapis.com/lee-pacureanu_data-exchange_us-storage/xray-challenge/XPRESS_validation_skels.npz)
+Validation skeletons: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/XPRESS_validation_skels.npz)
 
 ### (Optional) Convert h5 files to Zarr
 

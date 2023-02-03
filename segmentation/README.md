@@ -1,7 +1,15 @@
 
+Training and running our baseline for segmentation.
+
 ### Install dependencies
 
 `pip install -r requirements.txt`
+
+### Training
+
+First, see [network/](network/) for directions on preparing the dataset for training. Finish training then come back here to use this model for segmentation.
+
+TODO: provide a pre-trained model checkpoint.
 
 ### Run segmentation
 
@@ -12,12 +20,16 @@ To run segmentation on the validation dataset, first run inference using GPU dev
 CUDA_VISIBLE_DEVICES=0 python segway/tasks/segmentation/task_01_predict.py configs/segment_validation.json
 ```
 
+TODO: provide affs from the pre-trained model.
+
 Then the rest of the pipeline:
 ```
 python segway/tasks/segmentation/task_06a_extract_segments.py configs/segment_validation.json
 ```
 
 The output Zarr will be in `output/`.
+
+TODO: provide segmentations from the pre-trained model.
 
 ### Visualize
 
