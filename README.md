@@ -11,6 +11,10 @@ Validation raw + skeleton GT: [link](https://neuroglancer-demo.appspot.com/#!%7B
 
 Test raw: [link](https://neuroglancer-demo.appspot.com/#!%7B%22dimensions%22:%7B%22x%22:%5B3.3e-8%2C%22m%22%5D%2C%22y%22:%5B3.3e-8%2C%22m%22%5D%2C%22z%22:%5B3.3e-8%2C%22m%22%5D%7D%2C%22position%22:%5B619.9406127929688%2C558.4985961914062%2C600.5%5D%2C%22crossSectionScale%22:3.3201169227365477%2C%22projectionScale%22:2048%2C%22layers%22:%5B%7B%22type%22:%22image%22%2C%22source%22:%22precomputed://gs://lee-pacureanu_data-exchange_us-storage/xray-challenge/test-raw%22%2C%22tab%22:%22source%22%2C%22name%22:%22test-raw%22%7D%5D%2C%22selectedLayer%22:%7B%22visible%22:true%2C%22layer%22:%22test-raw%22%7D%2C%22layout%22:%224panel%22%7D)
 
-See [segmentation/](segmentation/README.md) for running a baseline segmentation model.
+## Running baseline segmentation model
+
+See [segmentation/](segmentation/README.md) for running our baseline segmentation model.
+
+## Evaluations and submission
 
 And see [eval/](eval/README.md) for directions on running evaluations and submission.
