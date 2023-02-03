@@ -109,6 +109,7 @@ def predict(
     print("db_host: ", db_host)
     print("db_name: ", db_name)
     print("completion_db_name: ", completion_db_name)
+    # asdf
     completion_db = Database(db_host, db_name, completion_db_name)
 
     if raw_file.endswith(".hdf"):
@@ -181,7 +182,6 @@ def predict(
     print("Starting prediction...")
     with build(pipeline):
         pipeline.request_batch(BatchRequest())
-    db_client.close()
     print("Prediction finished")
 
 

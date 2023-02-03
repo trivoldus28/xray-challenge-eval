@@ -45,10 +45,15 @@ parser.add_argument(
     type=int,
     default=0,
     help="Set port for URL")
+parser.add_argument(
+    '--host',
+    type=str,
+    default='0.0.0.0',
+    help="Set host for URL")
 
 args = parser.parse_args()
 
-neuroglancer.set_server_bind_address('0.0.0.0', args.port)
+neuroglancer.set_server_bind_address(args.host, args.port)
 viewer = neuroglancer.Viewer()
 # viewer = neuroglancer.UnsynchronizedViewer()
 

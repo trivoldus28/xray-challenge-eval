@@ -10,12 +10,13 @@ import pymongo
 import numpy as np
 from io import StringIO
 from jsmin import jsmin
+import sqlite3
+import time
 
 import daisy
 import ast
 
 from aggregate_configs import aggregateConfigs
-# from segway2.tasks.segmentation.aggregate_configs import aggregateConfigs
 
 logger = logging.getLogger(__name__)
 
@@ -46,19 +47,19 @@ class Database():
             # Use SQLite
             import sqlite3
             self.use_sql = True
-            os.makedirs("daisy_db", exist_ok=True)
-            self.con = sqlite3.connect(f'daisy_db/{db_id}.db', check_same_thread=False)
+            os.makedirs(f"daisy_db/{db_id}", exist_ok=True)
+            self.con = sqlite3.connect(f'daisy_db/{db_id}/{table_name}.db', check_same_thread=False)
             self.cur = self.con.cursor()
 
             if overwrite:
-                self.cur.execute(f"DROP TABLE IF EXISTS {self.table_name}")
+                self.cur.execute(f"DROP TABLE IF EXISTS {table_name}")
                 self.con.commit()
 
             # check if table exists
             self.cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
             tables = [k[0] for k in self.cur.fetchall()]
-            if self.table_name not in tables:
-                self.cur.execute(f"CREATE TABLE {self.table_name} (block_id text)")
+            if table_name not in tables:
+                self.cur.execute(f"CREATE TABLE {table_name} (block_id text)")
                 self.con.commit()
 
         else:
@@ -95,14 +96,24 @@ class Database():
     def add_finished(self, block_id):
 
         if self.use_sql:
+            import sqlite3
             block_id = '_'.join([str(s) for s in block_id])
-            self.cur.execute(f"INSERT INTO {self.table_name} VALUES ('{block_id}')")
+            while True:
+                try:
+                    self.cur.execute(f"INSERT INTO {self.table_name} VALUES ('{block_id}')")
+                    break
+                except sqlite3.OperationalError as error:
+                    # if error.args[0] == 'database is locked':
+                    #     time.sleep(1)  # too many concurrent access, sleep and retry
+                    # else:
+                        raise error
             self.con.commit()
         else:
             document = {
                 'block_id': block_id
             }
             self.completion_db.insert_one(document)
+
 
 
 class BaseTask():
@@ -219,6 +230,8 @@ class BaseTask():
 
         self.new_worker_cmd = f'{cmd} {self.config_file}'
 
+        # self.db_name = self.db_name + '_' + self.config_hash_short
+        # config['db_name'] = self.db_name
         config['completion_db_name'] = self.db_table_id
 
         os.makedirs('.run_configs', exist_ok=True)
@@ -248,6 +261,7 @@ class BaseTask():
         print("db_host: ", self.db_host)
         print("db_name: ", self.db_name)
         print("db_table_id: ", self.db_table_id)
+        # asdf
 
         if self.overwrite:
             print("Dropping table %s" % self.db_table_id)

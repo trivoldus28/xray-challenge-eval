@@ -1,40 +1,16 @@
-# xray-challenge-eval
 
-#### Make new environment
+# XPRESS challenge
 
-`python3.7 -m venv ubuntu18_py37`
+See [data/](data/README.md) for more directions on downloading datasets.
 
-#### Activate
+You can also preview the datasets first before downloading:
 
-`source ubuntu18_py37/bin/activate`
+Training raw + skeleton GT + voxel GT: [link](https://neuroglancer-demo.appspot.com/#!%7B%22dimensions%22:%7B%22x%22:%5B3.3e-8%2C%22m%22%5D%2C%22y%22:%5B3.3e-8%2C%22m%22%5D%2C%22z%22:%5B3.3e-8%2C%22m%22%5D%7D%2C%22position%22:%5B604.5031127929688%2C602.7859497070312%2C600.5%5D%2C%22crossSectionScale%22:0.9323938199059489%2C%22projectionOrientation%22:%5B-0.527566134929657%2C0.579612672328949%2C-0.5048351287841797%2C0.3617522418498993%5D%2C%22projectionScale%22:2048%2C%22layers%22:%5B%7B%22type%22:%22image%22%2C%22source%22:%22precomputed://gs://lee-pacureanu_data-exchange_us-storage/xray-challenge/training-raw%22%2C%22tab%22:%22source%22%2C%22name%22:%22training-raw%22%7D%2C%7B%22type%22:%22segmentation%22%2C%22source%22:%22precomputed://gs://lee-pacureanu_data-exchange_us-storage/xray-challenge/xpress-training-voxel-labels%22%2C%22tab%22:%22source%22%2C%22name%22:%22xpress-training-voxel-labels%22%7D%2C%7B%22type%22:%22segmentation%22%2C%22source%22:%22precomputed://https://catmaid3.hms.harvard.edu/cb2o2/staged_alignment_v3/delete_me/ng_skeletons/cutout5_230123%22%2C%22tab%22:%22source%22%2C%22segments%22:%5B%221%22%5D%2C%22segmentQuery%22:%221%22%2C%22name%22:%22gt_skeletons%22%7D%5D%2C%22showSlices%22:false%2C%22selectedLayer%22:%7B%22visible%22:true%2C%22layer%22:%22xpress-training-voxel-labels%22%7D%2C%22layout%22:%224panel%22%7D)
 
-#### Install Dependencies
+Validation raw + skeleton GT: [link](https://neuroglancer-demo.appspot.com/#!%7B%22dimensions%22:%7B%22x%22:%5B3.3e-8%2C%22m%22%5D%2C%22y%22:%5B3.3e-8%2C%22m%22%5D%2C%22z%22:%5B3.3e-8%2C%22m%22%5D%7D%2C%22position%22:%5B627.4053344726562%2C595.3873291015625%2C597.5%5D%2C%22crossSectionScale%22:2.7319072728259264%2C%22projectionOrientation%22:%5B-0.7071067690849304%2C0%2C0%2C0.7071067690849304%5D%2C%22projectionScale%22:1571.2377855505529%2C%22layers%22:%5B%7B%22type%22:%22image%22%2C%22source%22:%7B%22url%22:%22precomputed://gs://lee-pacureanu_data-exchange_us-storage/xray-challenge/validation-raw%22%2C%22subsources%22:%7B%22default%22:true%2C%22bounds%22:true%7D%2C%22enableDefaultSubsources%22:false%7D%2C%22tab%22:%22source%22%2C%22name%22:%22raw%22%7D%2C%7B%22type%22:%22segmentation%22%2C%22source%22:%22precomputed://https://catmaid3.hms.harvard.edu/cb2o2/staged_alignment_v3/delete_me/ng_skeletons/cutout4_230123%22%2C%22tab%22:%22source%22%2C%22segments%22:%5B%221%22%5D%2C%22segmentQuery%22:%221%22%2C%22name%22:%22skeletons_gt%22%7D%5D%2C%22showSlices%22:false%2C%22selectedLayer%22:%7B%22visible%22:true%2C%22layer%22:%22s22_WM_100nm_rec_db27_400_upscaled_cutout4_3x.tif%22%7D%2C%22layout%22:%224panel%22%7D)
 
-`pip install -r requirements.txt`
+Test raw: [link](https://neuroglancer-demo.appspot.com/#!%7B%22dimensions%22:%7B%22x%22:%5B3.3e-8%2C%22m%22%5D%2C%22y%22:%5B3.3e-8%2C%22m%22%5D%2C%22z%22:%5B3.3e-8%2C%22m%22%5D%7D%2C%22position%22:%5B619.9406127929688%2C558.4985961914062%2C600.5%5D%2C%22crossSectionScale%22:3.3201169227365477%2C%22projectionScale%22:2048%2C%22layers%22:%5B%7B%22type%22:%22image%22%2C%22source%22:%22precomputed://gs://lee-pacureanu_data-exchange_us-storage/xray-challenge/test-raw%22%2C%22tab%22:%22source%22%2C%22name%22:%22test-raw%22%7D%5D%2C%22selectedLayer%22:%7B%22visible%22:true%2C%22layer%22:%22test-raw%22%7D%2C%22layout%22:%224panel%22%7D)
 
-Then: `pip install git+https://github.com/funkelab/funlib.evaluate@d2852b3#egg=funlib.evaluate`
+See [segmentation/](segmentation/README.md) for running a baseline segmentation model.
 
-#### Run eval
-
-```bash=
-skel=skeletons/100nm_Cutout4_Validation.npz
-fin=seg_validation_setup01_no_bg.h5
-ds=submission_0p500
-python eval.py $skel $fin $ds
-```
-
-#### Expected outputs
-
-```
-n_neurons: 159
-Expected run-length: 4262.811622537732
-Split count (total, per-neuron): 513, 3.2264150943396226
-Merge count (total, per-neuron): 33, 0.20754716981132076
-VOI results:
-Rand split: 0.48944144434593373
-Rand merge: 0.9445481412350287
-VOI split: 1.5402566264329618
-VOI merge: 0.09220808711464024
-Normalized VOI split: 0.18124617902875728
-Normalized VOI merge: 0.010850375955715273
-```
+And see [eval/](eval/README.md) for directions on running evaluations and submission.
