@@ -18,7 +18,7 @@ python eval.py $fin --segmentation_ds $ds --skeleton_file $skel --mode validatio
 
 ### Expected outputs
 
-By default, the script will just print the XPRESS ERL+RAND score:
+By default, the script will just print the XPRESS ERL+Rand score which is used for ranking submissions:
 ```
 0.7499562483321406
 ```
@@ -43,6 +43,14 @@ XPRESS score (higher is better):
         VOI     : 0.9499685988285981
         RAND    : 0.8332381977531955
 ```
+
+### Score explanations
+
+- Normalized ERL: expected run length divided by the average ground-truth skeleton length
+- XPRESS VOI: 1 - (`voi_split` + `voi_merge`) / 2
+- XPRESS Rand: (`rand_split` + `rand_merge`) / 2
+- XPRESS ERL+VOI: (Normalized ERL + XPRESS VOI) / 2
+- XPRESS ERL+Rand: (Normalized ERL + XPRESS Rand) / 2
 
 ### Parallel evaluation
 

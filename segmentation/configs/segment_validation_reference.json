@@ -36,7 +36,7 @@
         {
             "name": "reference",
             "train_dir" : "networks/reference_setup",
-            "iteration" : 400000,
+            "iteration" : 320000,
             "net_voxel_size": [33, 33, 33]
         },
 
