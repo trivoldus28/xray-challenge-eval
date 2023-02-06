@@ -48,7 +48,7 @@
     "ExtractFragmentTask":
         {
             "no_check_dependency": 1,
-            "num_workers": 8
+            "num_workers": 1
         },
 
     "FindSegmentsGetLocalLUTsTask":
@@ -59,7 +59,7 @@
 
     "AgglomerateTask":
         {
-            "num_workers": 4
+            "num_workers": 1
             // "no_check_dependency": 1
         },
 
