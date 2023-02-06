@@ -21,12 +21,17 @@ def save_using_daisy(output_file, output_dataset, nparray, resolution, offset):
     '''
     resolution = daisy.Coordinate(resolution)
     offset = daisy.Coordinate(offset)
-    # roi_offset = offset * resolution
-    roi_shape = daisy.Coordinate(nparray.shape) * resolution
+    array_shape = nparray.shape[-3:]
+    roi_shape = daisy.Coordinate(array_shape) * resolution
     roi = daisy.Roi(offset, roi_shape)
+    num_channels = None
+    if len(nparray.shape) == 4:
+        # for affs datasets
+        num_channels = nparray.shape[0]
     ds = daisy.prepare_ds(
             output_file, output_dataset,
             roi, resolution, nparray.dtype,
+            num_channels=num_channels,
             compressor={'id': 'blosc', 'clevel': 3},
             delete=True
         )
