@@ -66,7 +66,7 @@ To aid participants with evaluating many checkpoints and agglomeration threshold
 ## Submission
 
 To make sure that your submission of `test` is evaluated correctly, please take note of the following items:
-- The submission is a single .h5 file.
+- The submission is a single .h5 file named `submission.h5`.
 - The dataset name should be `submission`.
 - In nm, the data offset and shape in nm should be exactly (3267,3267,3267) and (33066,33066,33066) - that is, the center 33um^3 of the provided raw volume.
     - **This is different from `validation` where the GT skels limited us to the center 23um^3 sub-volume**. Make sure that you set the ROI correctly for `test` vs `validation` when running segmentation.
@@ -77,7 +77,7 @@ To make sure that your submission of `test` is evaluated correctly, please take 
 
 Check that the submission is properly formatted with this command:
 ```
-python3 eval.py submission_team_a_awesome_model_230202.h5 --check_submission 1
+python3 eval.py submission.h5 --check_submission 1
 ```
 Which will print `Pass` if everything looks correct, otherwise it will give specific assertion errors.
 
@@ -89,7 +89,7 @@ To convert them to .h5 files for submission you can use the `convert_to_zarr_h5.
 
 For example:
 ```
-python3 ../data/convert_to_zarr_h5.py ../segmentation/outputs/test/setup03/320000/output.zarr volumes/segmentation_0.600 submission_team_a_awesome_model_230202.h5 submission --downsample 3
+python3 ../data/convert_to_zarr_h5.py ../segmentation/outputs/test/setup03/320000/output.zarr volumes/segmentation_0.600 submission.h5 submission --downsample 3
 ```
 
 If your outputs are neither .zarr nor .h5, you'll need to write your own script to perform the conversion to the .h5 submission file format.

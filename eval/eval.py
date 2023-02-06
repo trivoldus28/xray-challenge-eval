@@ -220,10 +220,13 @@ def run_eval(skeleton_file, segmentation_file, segmentation_ds, roi, downsamplin
     return ret
 
 def check_submission_correctness(segmentation_file,
+                                 check_file_name='submission.h5',
                                  check_ds_name='submission',
                                  check_resolution=(99,99,99),
                                  check_roi=daisy.Roi((3267,3267,3267), (33066,33066,33066)),
                                  ):
+    if segmentation_file != check_file_name:
+        raise RuntimeError(f'Fail: file is named {segmentation_file} instead of {check_file_name}')
     try:
         segment_array = daisy.open_ds(segmentation_file, check_ds_name)
     except:
