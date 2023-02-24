@@ -66,7 +66,7 @@ To aid participants with evaluating many checkpoints and agglomeration threshold
 ## Submission
 
 To make sure that your submission of `test` is evaluated correctly, please take note of the following items:
-- The submission is a single .h5 file named `submission.h5`.
+- The submission must be a single zip file containing a single .h5 file named `submission.h5`. You can make the zip file with any common compression utility but the content must be `submission.h5`.
 - The dataset name should be `submission`.
 - In nm, the data offset and shape in nm should be exactly (3267,3267,3267) and (33066,33066,33066) - that is, the center 33um^3 of the provided raw volume.
     - **This is different from `validation` where the GT skels limited us to the center 23um^3 sub-volume**. Make sure that you set the ROI correctly for `test` vs `validation` when running segmentation.
