@@ -5,6 +5,22 @@ Training and running our baseline for segmentation.
 
 `pip install -r requirements.txt`
 
+### SQLite3
+You may get an error like below:
+```
+In file included from src/blob.c:1:0:
+src/blob.h:4:10: fatal error: sqlite3.h: No such file or directory
+#include "sqlite3.h"
+        ^~~~~~~~~~~
+compilation terminated.
+error: command '/usr/bin/x86_64-linux-gnu-gcc' failed with exit code 1
+[end of output]
+note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed building wheel for pysqlite3
+```
+
+To resolve this, in Ubuntu first install: `sudo apt-get install libsqlite3-dev`, then rerun `pip install -r requirements.txt`
+
 ## Training
 
 First, see [network/](network/) for directions on preparing the dataset for training. Finish training then come back here to use this model for segmentation.

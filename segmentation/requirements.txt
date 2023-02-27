@@ -2,10 +2,10 @@ cython
 mahotas
 matplotlib
 git+https://github.com/funkelab/funlib.learn.jax
-git+https://github.com/funkelab/funlib.geometry#egg=funlib.geometry
+git+https://github.com/funkelab/funlib.geometry@976dc2c#egg=funlib.geometry
 jsmin
 pysqlite3
-git+https://github.com/trivoldus28/daisy@b7678eb#egg=daisy
+git+https://github.com/trivoldus28/daisy@db0087f#egg=daisy
 git+https://github.com/trivoldus28/funlib.segment@5779e0d#egg=funlib.segment
 git+https://github.com/htem/lsd@d2b4c36#egg=lsd
 git+https://github.com/htem/waterz@c963637#egg=waterz

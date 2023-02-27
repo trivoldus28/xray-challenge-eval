@@ -1,5 +1,5 @@
 cython
-numpy
+numpy==1.23.1
 zarr
 scipy
 scikit-image
@@ -10,11 +10,11 @@ git+https://github.com/trivoldus28/daisy@b7678eb#egg=daisy
 git+https://github.com/funkey/gunpowder@68dffe1#egg=gunpowder
 git+https://github.com/trivoldus28/funlib.show.neuroglancer@acd5a3a#egg=funlib.show.neuroglancer
 git+https://github.com/funkelab/funlib.learn.jax@bb202ec#egg=funlib.learn.jax
-#git+https://github.com/funkelab/funlib.segment@087e7ee#egg=funlib.segment
 
 # JAX dependencies
-jax[cuda] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-git+https://github.com/deepmind/dm-haiku
-git+https://github.com/deepmind/optax
-git+https://github.com/deepmind/chex
-git+https://github.com/deepmind/jmp
+# jax[cuda] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+dm-haiku==0.0.9
+optax==0.1.4
+chex==0.1.6
+jmp=0.0.3
+

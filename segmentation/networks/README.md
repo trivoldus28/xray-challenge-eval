@@ -4,6 +4,9 @@ Training the baseline model. The model is a U-net predicting affinity between pi
 
 `pip3 install -r requirements.txt`
 
+Then install JAX:
+`pip install --upgrade jax[cuda]==0.3.25 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html`
+
 ### Prepare training data
 
 We'll assume that the dataset is already downloaded to "../../data/xpress-challenge.zarr"
