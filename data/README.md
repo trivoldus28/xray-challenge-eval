@@ -25,6 +25,11 @@ Training skeletons: [download](https://github.com/htem/xpress-challenge-files/re
 
 Validation skeletons: [download](https://github.com/htem/xpress-challenge-files/releases/download/v1.0/XPRESS_validation_skels.npz)
 
+**Note:** the GT skeletons are only fully annotated for the inner 33um volume for `training` and `test`, but is the 23.1um for `validation`. That is:
+- ROI of raw for all three volumes are 39.6 x 39.6 x 39.6 um (1200 x 1200 x 1200 pix at 33nm resolution).
+- ROI of GT skeletons for `training`/`test` is the inner 33 x 33 x 33 um (1000 x 1000 x 1000 pix with an offset of 100 x 100 x 100 pix).
+- ROI of GT skeletons for `validation` is the inner 23.1 x 23.1 x 23.1 um (700 x 700 x 700 pix with an offset of 250 x 250 x 250 pix).
+
 ### (Optional) Convert h5 files to Zarr
 
 For high performance training in the baseline model, we will need to convert .h5 files to chunked .zarr files.
